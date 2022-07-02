@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 
 import AuthNavigator from "./AuthNavigator";
+import DashboardNavigator from "./DashboardNavigator";
 
 const MainNavigator = () => {
   return (
