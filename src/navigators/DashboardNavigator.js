@@ -1,14 +1,9 @@
-import Icons from "@expo/vector-icons/Feather";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
+import Icons from '@expo/vector-icons/Feather';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
 
-import { MAIN } from "../common/constant/screens";
-import {
-  DashboardScreen,
-  ProfileScreen,
-  SearchScreen,
-  TicketScreen,
-} from "../screens";
+import { MAIN } from '../common/constant/screens';
+import { DashboardScreen, ProfileScreen, SearchScreen, TicketScreen } from '../screens';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,33 +14,32 @@ const DashboardNavigator = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Dashboard") {
-            iconName = "home";
-          } else if (route.name === "Profile") {
-            iconName = "user";
-          } else if (route.name === "Search") {
-            iconName = "search";
-          } else if (route.name === "Ticket") {
-            iconName = "codesandbox";
+          if (route.name === 'Dashboard') {
+            iconName = 'home';
+          } else if (route.name === 'Profile') {
+            iconName = 'user';
+          } else if (route.name === 'Search') {
+            iconName = 'search';
+          } else if (route.name === 'Ticket') {
+            iconName = 'codesandbox';
           }
 
           // You can return any component that you like here!
           return <Icons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
-      })}
-    >
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+      })}>
       <Tab.Screen
         name="Dashboard"
         component={DashboardScreen}
         options={{
-          headerTitle: "Home",
+          headerTitle: 'Home',
           headerStyle: {
             borderBottomLeftRadius: 12,
             borderBottomRightRadius: 12,
-            backgroundColor: "white",
-            shadowColor: "#000",
+            backgroundColor: 'white',
+            shadowColor: '#000',
             shadowOffset: {
               width: 0,
               height: 2,
@@ -63,8 +57,8 @@ const DashboardNavigator = () => {
           headerStyle: {
             borderBottomLeftRadius: 12,
             borderBottomRightRadius: 12,
-            backgroundColor: "white",
-            shadowColor: "#000",
+            backgroundColor: 'white',
+            shadowColor: '#000',
             shadowOffset: {
               width: 0,
               height: 2,
@@ -82,8 +76,8 @@ const DashboardNavigator = () => {
           headerStyle: {
             borderBottomLeftRadius: 12,
             borderBottomRightRadius: 12,
-            backgroundColor: "white",
-            shadowColor: "#000",
+            backgroundColor: 'white',
+            shadowColor: '#000',
             shadowOffset: {
               width: 0,
               height: 2,
@@ -101,8 +95,8 @@ const DashboardNavigator = () => {
           headerStyle: {
             borderBottomLeftRadius: 12,
             borderBottomRightRadius: 12,
-            backgroundColor: "white",
-            shadowColor: "#000",
+            backgroundColor: 'white',
+            shadowColor: '#000',
             shadowOffset: {
               width: 0,
               height: 2,
