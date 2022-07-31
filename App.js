@@ -6,6 +6,7 @@ import {
 } from '@expo-google-fonts/merriweather';
 import { useFonts } from 'expo-font';
 import { extendTheme, NativeBaseProvider } from 'native-base';
+import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
 
 import { MainNavigator } from './src/navigators';
@@ -73,6 +74,7 @@ export default function App() {
     <Provider store={store}>
       <NativeBaseProvider theme={theme}>
         <MainNavigator />
+        <Toast />
       </NativeBaseProvider>
     </Provider>
   );

@@ -32,9 +32,9 @@ const AlertC = ({ status, title = '', name }) => {
   return (
     <Slide
       in={openAlerts.includes(name)}
-      placement="bottom"
+      placement="top"
       duration={400}
-      justifyContent="flex-end">
+      justifyContent="flex-start">
       <Center>
         <Stack space={3} w="100%" maxW="400">
           <Alert w="100%" status={status}>
