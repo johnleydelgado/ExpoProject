@@ -27,7 +27,7 @@ const DashboardNavigator = () => {
           // You can return any component that you like here!
           return <Icons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato',
+        tabBarActiveTintColor: '#19A64A',
         tabBarInactiveTintColor: 'gray',
       })}>
       <Tab.Screen
@@ -55,17 +55,7 @@ const DashboardNavigator = () => {
         component={ProfileScreen}
         options={{
           headerStyle: {
-            borderBottomLeftRadius: 12,
-            borderBottomRightRadius: 12,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
+            backgroundColor: '#E5E5E5',
           },
         }}
       />
