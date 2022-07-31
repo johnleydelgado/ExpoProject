@@ -2,18 +2,16 @@ import Icons from '@expo/vector-icons/Feather';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
-import { MAIN } from '../common/constant/screens';
 import { DashboardScreen, ProfileScreen, SearchScreen, TicketScreen } from '../screens';
-
 const Tab = createBottomTabNavigator();
 
 const DashboardNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        title: '',
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-
           if (route.name === 'Dashboard') {
             iconName = 'home';
           } else if (route.name === 'Profile') {
@@ -34,19 +32,9 @@ const DashboardNavigator = () => {
         name="Dashboard"
         component={DashboardScreen}
         options={{
-          headerTitle: 'Home',
           headerStyle: {
-            borderBottomLeftRadius: 12,
-            borderBottomRightRadius: 12,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
+            height: 35,
+            backgroundColor: '#E5E5E5',
           },
         }}
       />
@@ -55,17 +43,8 @@ const DashboardNavigator = () => {
         component={ProfileScreen}
         options={{
           headerStyle: {
-            borderBottomLeftRadius: 12,
-            borderBottomRightRadius: 12,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
+            height: 35,
+            backgroundColor: '#E5E5E5',
           },
         }}
       />
@@ -74,17 +53,8 @@ const DashboardNavigator = () => {
         component={SearchScreen}
         options={{
           headerStyle: {
-            borderBottomLeftRadius: 12,
-            borderBottomRightRadius: 12,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
+            height: 35,
+            backgroundColor: '#E5E5E5',
           },
         }}
       />
@@ -93,17 +63,8 @@ const DashboardNavigator = () => {
         component={TicketScreen}
         options={{
           headerStyle: {
-            borderBottomLeftRadius: 12,
-            borderBottomRightRadius: 12,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
+            height: 35,
+            backgroundColor: '#E5E5E5',
           },
         }}
       />

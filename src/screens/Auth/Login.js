@@ -1,113 +1,130 @@
 //import liraries
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { useFormik } from 'formik';
-import { Box, Center, Text, Icon, Button } from 'native-base';
+import { Box, Center, Text, Icon, Button, Stack, Input, FormControl } from 'native-base';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-// import {
-//   View,
-//   Text,
-//   StyleSheet,
-//   Button,
-//   Pressable,
-//   TextInput,
-// } from "react-native";
+import { ImageBackground } from 'react-native';
 
-import { INVALID_ACCOUNT } from '../../common/constant/validationMessage';
-import { loginInitialValue, loginSchema } from '../../common/formik/users';
-import AlertC from '../../component/Common/Alert';
-import CommonInput from '../../component/Inputs/CommonInput';
-import { OPEN_ALERT, RESET_ALERT } from '../../redux/common';
+import images from '../../common/constant/images';
+import { MAIN } from '../../common/constant/screens';
 
 // create a component
 const Login = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const [isPassword, setIsPassword] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const formik = useFormik({
-    enableReinitialize: true,
-    initialValues: loginInitialValue,
-    validationSchema: loginSchema,
-    onSubmit: (values) => {
-      dispatch(RESET_ALERT());
-      if (values.email === 'johnley@gmail.com' && values.password === '0000') {
-        dispatch(OPEN_ALERT('login-success'));
-      } else {
-        dispatch(OPEN_ALERT('invalid-account'));
-      }
-    },
-  });
-
-  const formikProps = (field) => {
-    return {
-      onChange: formik.handleChange(field),
-      onBlur: formik.handleBlur(field),
-      value: formik.values[field],
-      error: formik.touched[field] && formik.errors[field] ? formik.errors[field] : null,
-    };
+  const onChangeHandler = (value, type) => {
+    console.log(value, type);
+    if (type === 'email') {
+      setEmail(value);
+    } else {
+      setPassword(value);
+    }
   };
 
-  return (
-    <Box safeAreaTop={8}>
-      <AlertC title="Login successfully" status="success" name="login-success" />
-      <AlertC title={INVALID_ACCOUNT} status="error" name="invalid-account" />
+  const saveHandler = () => {
+    if (email === 'a' && password === 'a') {
+      alert('Login Success!');
+      navigation.navigate(MAIN.DASHBOARD);
+    } else if (email === '' || password === '') {
+      alert('Please fill up all fields!');
+    } else {
+      alert('Wrong Email or Password!');
+    }
+  };
 
-      {/* Header text */}
-      <Center px={2}>
-        <Text fontWeight="100" fontFamily="body" fontSize={28} color="#000">
+  const goToRegistration = () => {
+    navigation.navigate(MAIN.SIGN_UP);
+  };
+
+  const [show, setShow] = React.useState(false);
+  return (
+    <Box flex="1">
+      <Center style={{ flex: 1 }}>
+        <ImageBackground
+          source={images.bgImage}
+          resizeMode="cover"
+          style={{
+            width: '100%',
+            height: '100%',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}>
+          <Button backgroundColor="white" w="10" size="2" mb={8} />
+        </ImageBackground>
+      </Center>
+      <Stack space={2} px={4} backgroundColor="#FFFFFF" flex="3">
+        <Text fontSize="24" fontWeight="700" pt={4} Top="190" Left="30">
           Login
         </Text>
-        <Box>
-          <Text fontWeight="100" fontFamily="body" fontSize={14} style={{ textAlign: 'center' }}>
-            By signing in you are agreeing
-          </Text>
-          <Text fontWeight="100" fontFamily="body" fontSize={14} style={{ textAlign: 'center' }}>
-            our Term and privacy policy
-          </Text>
-        </Box>
+        <Text fontSize="16" fontWeight="400" mt={-2} Top="232" Left="30" color="#888888">
+          Sign to your account
+        </Text>
+
+        <FormControl w="98%" mt="7">
+          <FormControl.Label fontSize="14" fontWeight="400" color="#888888">
+            Your Email
+          </FormControl.Label>
+          <Input
+            placeholder="Enter email"
+            onChangeText={(value) => onChangeHandler(value, 'email')}
+          />
+        </FormControl>
+
+        <FormControl w="98%" mt="3">
+          <FormControl.Label fontSize="14" fontWeight="400" color="#888888">
+            Password
+          </FormControl.Label>
+          {/* <Input placeholder="Enter password" /> */}
+          <Input
+            w={{
+              base: '100%',
+              md: '25%',
+            }}
+            type={show ? 'text' : 'password'}
+            InputRightElement={
+              <Icon
+                as={<MaterialIcons name={show ? 'visibility' : 'visibility-off'} />}
+                size={5}
+                mr="2"
+                color="muted.400"
+                onPress={() => setShow(!show)}
+              />
+            }
+            placeholder="Password"
+            onChangeText={(value) => onChangeHandler(value, 'password')}
+          />
+        </FormControl>
+
+        {/* <Button w="100%" backgroundColor="white" borderRadius="0" borderColor="transparent"> */}
+        <Text fontSize="14" mt="5" fontWeight="700" color="#121515">
+          Forgot Password?
+        </Text>
+        {/* </Button> */}
+      </Stack>
+      <Center backgroundColor="#FFFFFF">
+        <Text
+          fontSize="14"
+          mb="6"
+          fontWeight="700"
+          color="#121515"
+          onPress={() => goToRegistration()}>
+          I don’t have account?
+        </Text>
       </Center>
-
-      {/* Inputs */}
-      <Box width="100%" mx="auto" pt={2}>
-        <CommonInput
-          variant="underlined"
-          placeholder="Email Address"
-          isRequired
-          my={2}
-          leftIcon={
-            <Icon as={<MaterialIcons name="email" />} size={4} ml="2" color="#A6A6A6" mx={2} />
-          }
-          {...formikProps('email')}
-        />
-        <CommonInput
-          variant="underlined"
-          placeholder="password"
-          isRequired
-          secureTextEntry={isPassword}
-          my={2}
-          leftIcon={
-            <Icon as={<MaterialIcons name="lock" />} size={4} ml="2" color="#A6A6A6" mx={2} />
-          }
-          rightIcon={
-            <Icon
-              as={<MaterialIcons name="visibility" />}
-              size={4}
-              ml="2"
-              color="#A6A6A6"
-              mx={2}
-              onPress={() => setIsPassword(!isPassword)}
-            />
-          }
-          {...formikProps('password')}
-        />
-
-        {/* Button */}
-        <Button mt={4} onPress={formik.handleSubmit} mx={4}>
-          Submit
+      <Center>
+        <Button
+          w="100%"
+          variant="outline"
+          borderRadius={0}
+          backgroundColor="#19A54A"
+          onPress={() => saveHandler()}>
+          <Text fontSize="sm" color="white">
+            Sign to your account
+          </Text>
         </Button>
-      </Box>
+      </Center>
     </Box>
   );
 };
