@@ -2,7 +2,7 @@ import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/
 import React from 'react';
 
 import { MAIN } from '../common/constant/screens';
-import { DashboardScreen, LoginScreen, SignUpScreen } from '../screens';
+import { DashboardScreen, LoginScreen, OnBoardingScreen, SignUpScreen, Test } from '../screens';
 import DashboardNavigator from './DashboardNavigator';
 
 const Stack = createStackNavigator();
@@ -14,6 +14,7 @@ const AuthNavigator = () => {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         headerShown: false,
       }}>
+      <Stack.Screen name={MAIN.ONBOARDING} component={OnBoardingScreen} />
       <Stack.Screen
         name={MAIN.LOGIN}
         component={LoginScreen}
@@ -29,6 +30,19 @@ const AuthNavigator = () => {
         }}
       />
       <Stack.Screen name={MAIN.SIGN_UP} component={SignUpScreen} options={{ title: 'SIGNUP' }} />
+      <Stack.Screen
+        name={MAIN.TEST}
+        component={Test}
+        options={{
+          title: 'Bio-data',
+          headerShown: true,
+          headerTitle: 'Bio-data',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#E5E5E5',
+          },
+        }}
+      />
       <Stack.Screen
         name={MAIN.DASHBOARD}
         component={DashboardNavigator}
