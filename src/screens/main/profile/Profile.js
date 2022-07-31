@@ -29,15 +29,22 @@ const CardComponent = ({ title, subtitle, other, icon, onPress }) => (
           backgroundColor: 'rgba(6, 1, 180, 0.05)',
           padding: 12,
           borderRadius: 100,
+          height: 40,
+          width: 40,
         }}>
         {icon}
       </Box>
-      <VStack justifyContent="center">
+      <VStack justifyContent="center" flex="3">
         <Text color="black" fontSize="14" fontWeight="500" fontFamily="body">
           {title}
         </Text>
         {subtitle && (
-          <Text color="#ABABAB" fontSize="14" fontWeight="300" fontFamily="body">
+          <Text
+            color="#ABABAB"
+            width="100%"
+            fontWeight="300"
+            fontFamily="body"
+            lineBreakMode="tail">
             {subtitle}
           </Text>
         )}
@@ -80,7 +87,7 @@ const Profile = () => {
       title: 'My account',
       subtitle: 'Make changes to your account',
       other: myAccount,
-      icon: <Ionicons name="person-outline" size={22} color="#0601B4" />,
+      icon: <Ionicons name="person-outline" size={16} color="#0601B4" />,
       onPress: () => console.log('test'),
     },
     {
@@ -88,7 +95,7 @@ const Profile = () => {
       title: 'Saved Beneficiary',
       subtitle: 'Manage your saved account',
       other: common,
-      icon: <Ionicons name="person-outline" size={22} color="#0601B4" />,
+      icon: <Ionicons name="person-outline" size={16} color="#0601B4" />,
       onPress: () => console.log('test'),
     },
     {
@@ -96,7 +103,7 @@ const Profile = () => {
       title: 'Face ID / Touch ID',
       subtitle: 'Manage your device security',
       other: faceId,
-      icon: <Icons name="lock" size={22} color="#0601B4" />,
+      icon: <Icons name="lock" size={16} color="#0601B4" />,
       onPress: () => console.log('test'),
     },
     {
@@ -104,7 +111,7 @@ const Profile = () => {
       title: 'Two-Factor Authentication',
       subtitle: 'Further secure your account for safety',
       other: common,
-      icon: <MaterialIcons name="security" size={22} color="#0601B4" />,
+      icon: <MaterialIcons name="security" size={16} color="#0601B4" />,
       onPress: () => console.log('test'),
     },
     {
@@ -112,7 +119,7 @@ const Profile = () => {
       title: 'Logout',
       subtitle: 'Further secure your account for safety',
       other: common,
-      icon: <MaterialIcons name="logout" size={22} color="#0601B4" />,
+      icon: <MaterialIcons name="logout" size={16} color="#0601B4" />,
       onPress: () => navigation.reset({ routes: [{ name: MAIN.LOGIN }] }),
     },
   ];
@@ -122,14 +129,14 @@ const Profile = () => {
       key: 6,
       title: 'Help & Support',
       other: common,
-      icon: <Icons name="bell" size={22} color="#0601B4" />,
+      icon: <Icons name="bell" size={16} color="#0601B4" />,
       onPress: () => console.log('test'),
     },
     {
       key: 7,
       title: 'About App',
       other: common,
-      icon: <AntDesign name="hearto" size={22} color="#0601B4" />,
+      icon: <AntDesign name="hearto" size={16} color="#0601B4" />,
       onPress: () => console.log('test'),
     },
   ];
