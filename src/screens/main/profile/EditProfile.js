@@ -1,6 +1,7 @@
 //import liraries
 import { MaterialIcons } from '@expo/vector-icons';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 import {
   Avatar,
   Box,
@@ -18,16 +19,29 @@ import {
   Flex,
   Pressable,
 } from 'native-base';
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, StyleSheet, TextInput, Platform, TouchableOpacity } from 'react-native';
 
+import ModalSummary from './ModalSummary';
 // create a component
 const EditProfile = () => {
-  const [service, setService] = React.useState('');
-  const [isDateOpen, setIsDateOpen] = React.useState('');
+  const [gender, setGender] = React.useState('');
+  const [isDateOpen, setIsDateOpen] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [data, setData] = useState({});
+
+  const selectDate = (date) => {
+    setIsDateOpen(false);
+    setData({ ...data, birthDate: moment(date).format('LL') });
+  };
+
+  useEffect(() => {
+    setData({ ...data, gender });
+  }, [gender]);
 
   return (
     <Box flex="1" safeAreaTop={16}>
+      <ModalSummary showModal={showModal} setShowModal={setShowModal} data={data} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Center p={4} paddingTop="1/6">
           <VStack space={2} alignItems="center" paddingBottom={12}>
@@ -53,19 +67,22 @@ const EditProfile = () => {
               style={styles.textfieldStyle}
               placeholder="Whats your first name?"
               placeholderTextColor="black"
+              onChangeText={(text) => setData({ ...data, firstName: text })}
             />
             <TextInput
               style={styles.textfieldStyle}
               placeholder="And your last name?"
               placeholderTextColor="black"
+              onChangeText={(text) => setData({ ...data, lastName: text })}
             />
             <TextInput
               style={styles.textfieldStyle}
               placeholder="Phone number"
               placeholderTextColor="black"
+              onChangeText={(text) => setData({ ...data, phoneNumber: text })}
             />
             <Select
-              selectedValue={service}
+              selectedValue={gender}
               w="full"
               accessibilityLabel="Select your gender"
               placeholder="Select your gender"
@@ -76,27 +93,10 @@ const EditProfile = () => {
               }}
               height={54}
               backgroundColor="white"
-              onValueChange={(itemValue) => setService(itemValue)}>
+              onValueChange={(itemValue) => setGender(itemValue)}>
               <Select.Item label="Male" value="male" />
               <Select.Item label="Female" value="female" />
             </Select>
-            {/* <Button
-              variant="outline"
-              backgroundColor="white"
-              w="full"
-              height={54}
-              justifyContent="space-between"
-              _text={{
-                color: '#121515',
-                fontFamily: 'body',
-              }}
-              _stack={{ justifyContent: 'flex-end', alignItems: 'flex' }}
-              rightIcon={
-                <Icon as={<MaterialIcons name="calendar-today" />} size={6} color="blue.400" />
-              }
-              onPress={() => setIsDateOpen(!isDateOpen)}>
-              What is your date of birth?
-            </Button> */}
             <Pressable onPress={() => setIsDateOpen(!isDateOpen)} w="full">
               <Box
                 height={54}
@@ -105,7 +105,11 @@ const EditProfile = () => {
                 justifyContent="space-between"
                 alignItems="center"
                 style={styles.textfieldStyle}>
-                <Text> What is your date of birth?</Text>
+                <Text>
+                  {data.birthDate
+                    ? moment(data.birthDate).format('LL')
+                    : `What is your date of birth?`}
+                </Text>
                 <Icon as={<MaterialIcons name="calendar-today" />} size={6} color="blue.400" />
               </Box>
             </Pressable>
@@ -114,7 +118,7 @@ const EditProfile = () => {
               height={55}
               borderRadius={15}
               backgroundColor="#0601B4"
-              onPress={() => console.log('test')}>
+              onPress={() => setShowModal(true)}>
               Update Profile
             </Button>
           </VStack>
@@ -122,7 +126,9 @@ const EditProfile = () => {
       </ScrollView>
 
       {Platform.OS === 'android' ? (
-        isDateOpen && <RNDateTimePicker value={new Date()} />
+        isDateOpen && (
+          <RNDateTimePicker value={new Date()} onChange={(event, date) => selectDate(date)} />
+        )
       ) : (
         <Actionsheet isOpen={isDateOpen} onClose={() => setIsDateOpen(false)}>
           <Actionsheet.Content>
@@ -135,7 +141,10 @@ const EditProfile = () => {
                 }}>
                 Please select a date
               </Text>
-              <RNDateTimePicker value={new Date()} />
+              <RNDateTimePicker
+                value={new Date()}
+                onChange={(event, date) => selectDate(event, date)}
+              />
             </Box>
           </Actionsheet.Content>
         </Actionsheet>

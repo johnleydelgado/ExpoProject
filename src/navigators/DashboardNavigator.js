@@ -97,10 +97,7 @@ const DashboardNavigator = () => {
       <Tab.Screen
         name={TABS.PROFILE}
         component={ProfileStack}
-        options={({ route }) => ({
-          headerShown: false,
-          tabBarStyle: { display: getTabBarVisibility(route) ? 'flex' : 'none' },
-        })}
+        options={({ route }) => ({ headerShown: false })}
       />
     </Tab.Navigator>
   );
